@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "591584972906",
+    "firebase_url": "https://salat-diary.firebaseio.com",
+    "project_id": "salat-diary",
+    "storage_bucket": "salat-diary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591584972906:android:7c7bfd0002b74a28",
+        "android_client_info": {
+          "package_name": "id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591584972906-k7vs15bj98s1cr982mob3vcpre9agc1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBujDyJGDoFDiPK_Zo8RS0CDPNTsmcq88k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

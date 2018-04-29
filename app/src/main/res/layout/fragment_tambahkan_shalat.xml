@@ -1,14 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pages.TambahkanShalatFragment">
+    tools:context="id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Pages.TambahkanShalatFragment"
+    tools:layout_editor_absoluteY="81dp">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Tambahkan Salat" />
+        android:id="@+id/tv_status_shalat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="92dp"
+        android:text="Bagaimana Shalatmu?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+
+    <Button
+        android:id="@+id/but_telat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/but_jamaah"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="140dp"
+        android:layout_marginEnd="88dp"
+        android:text="Telat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/but_jamaah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Jamaah"
+        app:layout_constraintBottom_toTopOf="@+id/but_tdkShalat"
+        app:layout_constraintEnd_toStartOf="@+id/but_sendiri"
+        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_status_shalat" />
+
+    <Button
+        android:id="@+id/but_tdkShalat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tv_status_shalat"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="140dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Tidak"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/but_telat"
+        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/but_sendiri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tv_status_shalat"
+        android:layout_alignTop="@+id/but_jamaah"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginTop="8dp"
+        android:text="Sendiri"
+        app:layout_constraintBottom_toTopOf="@+id/but_telat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_status_shalat" />
+
+</android.support.constraint.ConstraintLayout>
