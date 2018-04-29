@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "591584972906-fscriiort3jpluhiig7bnk327baaigvi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary",
+            "certificate_hash": "98d3b0266e42ff4dc0d89f45f493f84a6032dff0"
+          }
+        },
+        {
           "client_id": "591584972906-k7vs15bj98s1cr982mob3vcpre9agc1e.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591584972906-k7vs15bj98s1cr982mob3vcpre9agc1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
