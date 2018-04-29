@@ -18,6 +18,7 @@ import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
 
 public class KalenderShalatFragment extends Fragment implements OnDateSelectedListener, OnMonthChangedListener {
 
+    MaterialCalendarView widget;
 
     public KalenderShalatFragment() {
         // Required empty public constructor
@@ -31,11 +32,16 @@ public class KalenderShalatFragment extends Fragment implements OnDateSelectedLi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_kalender_shalat, container, false);
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        widget = getView().findViewById(R.id.calendarView);
+        widget.setOnDateChangedListener(this);
+        widget.setOnMonthChangedListener(this);
     }
 
     @Override
