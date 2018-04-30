@@ -6,11 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
 
 
 public class StatistikShalatFragment extends Fragment {
+
+
+    TextView textView;
 
     public StatistikShalatFragment() {
         // Required empty public constructor
