@@ -83,92 +83,92 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-        @Override
-        protected void onStart () {
-            super.onStart();
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-            if (mAuth.getCurrentUser() == null) {
-                finish();
-                startActivity(new Intent(this, MainActivity.class));
-            }
-        }
-
-        private void saveUserInfo () {
-            String displayName = editText.getText().toString().trim();
-            if (displayName.isEmpty()) {
-                editText.setError("Name is required");
-                editText.requestFocus();
-                return;
-            }
-            FirebaseUser user = mAuth.getCurrentUser();
-
-            if (user != null) {
-                UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(displayName)
-                        .setPhotoUri(Uri.parse(profileImageUrl))
-                        .build();
-
-                user.updateProfile(profile)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(ProfileActivity.this, "Profile Updated", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-        }
-
-        @Override
-        protected void onActivityResult ( int requestCode, int resultCode, Intent data){
-            super.onActivityResult(requestCode, resultCode, data);
-
-            if (requestCode == CHOOSE_IMAGE && requestCode == RESULT_OK && data != null && data.getData() != null) {
-                uriProfileImge = data.getData();
-
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriProfileImge);
-                    profilePhoto.setImageBitmap(bitmap);
-
-                    uploadImageToFirebaseStorage();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        private void uploadImageToFirebaseStorage () {
-            StorageReference profileImageRef =
-                    FirebaseStorage.getInstance().getReference("profilepics/" + System.currentTimeMillis() + ".jpg");
-
-            if (uriProfileImge != null) {
-                progressBar.setVisibility(View.VISIBLE);
-                profileImageRef.putFile(uriProfileImge)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                                progressBar.setVisibility(View.GONE);
-                                profileImageUrl = taskSnapshot.getDownloadUrl().toString();
-
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        }
-
-        private void showImageChooser () {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select Profile Photo"), CHOOSE_IMAGE);
+        if (mAuth.getCurrentUser() == null) {
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
+
+    private void saveUserInfo() {
+        String displayName = editText.getText().toString().trim();
+        if (displayName.isEmpty()) {
+            editText.setError("Name is required");
+            editText.requestFocus();
+            return;
+        }
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(displayName)
+                    .setPhotoUri(Uri.parse(profileImageUrl))
+                    .build();
+
+            user.updateProfile(profile)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(ProfileActivity.this, "Profile Updated", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CHOOSE_IMAGE && requestCode == RESULT_OK && data != null && data.getData() != null) {
+            uriProfileImge = data.getData();
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriProfileImge);
+                profilePhoto.setImageBitmap(bitmap);
+
+                uploadImageToFirebaseStorage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void uploadImageToFirebaseStorage() {
+        StorageReference profileImageRef =
+                FirebaseStorage.getInstance().getReference("profilepics/" + System.currentTimeMillis() + ".jpg");
+
+        if (uriProfileImge != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            profileImageRef.putFile(uriProfileImge)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            progressBar.setVisibility(View.GONE);
+                            profileImageUrl = taskSnapshot.getDownloadUrl().toString();
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    private void showImageChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Profile Photo"), CHOOSE_IMAGE);
+    }
+}

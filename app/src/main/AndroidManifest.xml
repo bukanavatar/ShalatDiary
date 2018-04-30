@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".DetailKalenderActivity"></activity>
+        <activity android:name=".DetailKalenderActivity" />
+        <activity android:name=".Pages.ProfilFragment" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
