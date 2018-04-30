@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +43,7 @@ public class TambahkanShalatFragment extends Fragment {
 
     private ProgressDialog mProd;
 
-    ImageButton mJamaah, mSendiri, mTelat, mTidakShalat;
+    Button mJamaah, mSendiri, mTelat, mTidakShalat;
     TextView mStatusShalat;
 
     public TambahkanShalatFragment() {
