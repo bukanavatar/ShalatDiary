@@ -53,13 +53,13 @@ public class JadwalShalatFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        retrofitJadwalShalat();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        retrofitJadwalShalat();
+
     }
 
     private void retrofitJadwalShalat() {

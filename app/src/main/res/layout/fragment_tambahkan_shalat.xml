@@ -82,7 +82,6 @@
                     android:text="Jamaah" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-
         <android.support.v7.widget.CardView
             android:id="@+id/cardView1"
             android:layout_width="0dp"
