@@ -1,6 +1,5 @@
 package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Pages;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,6 +23,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -35,7 +35,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
-import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.LoginActivity;
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
 
 import static android.support.constraint.Constraints.TAG;
@@ -53,7 +52,7 @@ public class StatistikShalatFragment extends Fragment {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy", Locale.ENGLISH);
     String dateFormatted = simpleDateFormat.format(tanggalSekarang);
 
-    ArrayList<String> statusShalatDialy = new ArrayList<String>();
+    ArrayList<String> statusShalatDialy = new ArrayList<>();
     int jamaah;
     int sendiri;
     int telat;
@@ -102,59 +101,50 @@ public class StatistikShalatFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_statistik_shalat, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() == null) {
-                    Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
-                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(loginIntent);
-
-                } else {
-                    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-                    initializeHalfChart();
-                    getDialyShalat(email);
-                }
-            }
-        };
-
-
+        initializeHalfChart();
+        getDialyShalat();
     }
 
-    private void getDialyShalat(String email) {
+    private void getDialyShalat() {
         mFirebaseFirestore = FirebaseFirestore.getInstance();
 
-        mFirebaseFirestore.collection("dataShalat").document(email)
-                .collection("tanggal").document(dateFormatted)
-                .collection("statusShalat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot doc : task.getResult()) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String email = user.getEmail();
+            mFirebaseFirestore.collection("dataShalat").document(email)
+                    .collection("tanggal").document(dateFormatted)
+                    .collection("statusShalat").get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot doc : task.getResult()) {
 
-                        statusShalatDialy.add(doc.getString("status"));
-                        Log.d(TAG, "Jumlah Array: " + statusShalatDialy.size());
+                                    statusShalatDialy.add(doc.getString("status"));
+                                    Log.d(TAG, "Jumlah Array: " + statusShalatDialy.size());
 
-                        setJamaah(Collections.frequency(statusShalatDialy, "Jamaah"));
-                        setSendiri(Collections.frequency(statusShalatDialy, "Sendiri"));
-                        setTelat(Collections.frequency(statusShalatDialy, "Telat"));
-                        setTidakShalat(Collections.frequency(statusShalatDialy, "Tidak Shalat"));
+                                    setJamaah(Collections.frequency(statusShalatDialy, "Jamaah"));
+                                    setSendiri(Collections.frequency(statusShalatDialy, "Sendiri"));
+                                    setTelat(Collections.frequency(statusShalatDialy, "Telat"));
+                                    setTidakShalat(Collections.frequency(statusShalatDialy, "Tidak Shalat"));
 
-                        setHalfPieChartData(getJamaah(), getSendiri(), getTelat(), getTidakShalat());
-                        mHalfPieChart.notifyDataSetChanged();
-                        Log.d(TAG, "Jumlah Tidak Shalat AAA: " + getTidakShalat());
-                    }
-                }
-            }
-        });
+                                    setHalfPieChartData(getJamaah(), getSendiri(), getTelat(), getTidakShalat());
+                                    mHalfPieChart.notifyDataSetChanged();
+                                    Log.d(TAG, "Jumlah Tidak Shalat AAA: " + getTidakShalat());
+                                }
+                            }
+                        }
+                    });
+        }
     }
 
     private void initializeHalfChart() {
