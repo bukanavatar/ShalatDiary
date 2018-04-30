@@ -1,5 +1,6 @@
 package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Pages;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -34,6 +35,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
+import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.LoginActivity;
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
 
 import static android.support.constraint.Constraints.TAG;
@@ -44,7 +46,8 @@ public class StatistikShalatFragment extends Fragment {
 
     PieChart mHalfPieChart;
     FirebaseFirestore mFirebaseFirestore;
-    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+    FirebaseAuth.AuthStateListener mAuthListener;
 
     Date tanggalSekarang = Calendar.getInstance().getTime();
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy", Locale.ENGLISH);
@@ -105,12 +108,28 @@ public class StatistikShalatFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initializeHalfChart();
-        getDialyShalat();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(loginIntent);
+
+                } else {
+                    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                    initializeHalfChart();
+                    getDialyShalat(email);
+                }
+            }
+        };
+
 
     }
 
-    private void getDialyShalat() {
+    private void getDialyShalat(String email) {
         mFirebaseFirestore = FirebaseFirestore.getInstance();
 
         mFirebaseFirestore.collection("dataShalat").document(email)

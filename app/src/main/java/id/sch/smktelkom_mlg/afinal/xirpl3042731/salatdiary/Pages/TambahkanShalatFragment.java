@@ -44,8 +44,8 @@ public class TambahkanShalatFragment extends Fragment {
 
     private ProgressDialog mProd;
 
-    Button mJamaah, mSendiri, mTelat, mTidakShalat;
-    TextView mStatusShalat;
+    Button jamaah, sendiri, telat, tidakShalat;
+    TextView statusShalat;
     CardView mainpage;
 
     public TambahkanShalatFragment() {
@@ -74,17 +74,153 @@ public class TambahkanShalatFragment extends Fragment {
     private void buttonMenambahkanShalat() {
         final String[] namaShalat = {"Subuh", "Dzuhur", "Ashar", "Maghrib", "Isya"};
         final String[] kondisiShalat = {"Jamaah", "Sendiri", "Telat", "Tidak Shalat"};
-        //tinggal gambar
         if (jam >= 4 && jam < 12) {
-            mStatusShalat.setText("Bagaimana Shalat Subuhmu?");
+
+            jamaah.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[0], kondisiShalat[0]);
+                }
+            });
+            sendiri.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[0], kondisiShalat[1]);
+                }
+            });
+
+            telat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[0], kondisiShalat[2]);
+                }
+            });
+
+            tidakShalat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[0], kondisiShalat[3]);
+                }
+            });
+
+            statusShalat.setText("Bagaimana Shalat Subuhmu?");
         } else if (jam >= 12 && jam < 15) {
-            mStatusShalat.setText("Bagaimana Shalat Dzuhurmu?");
+
+            jamaah.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[1], kondisiShalat[0]);
+                }
+            });
+            sendiri.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[1], kondisiShalat[1]);
+                }
+            });
+
+            telat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[1], kondisiShalat[2]);
+                }
+            });
+
+            tidakShalat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[1], kondisiShalat[3]);
+                }
+            });
+            statusShalat.setText("Bagaimana Shalat Dzuhurmu?");
         } else if (jam >= 15 && jam < 18) {
-            mStatusShalat.setText("Bagaimana Shalat Asharmu?");
+            jamaah.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[2], kondisiShalat[0]);
+                }
+            });
+            sendiri.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[2], kondisiShalat[1]);
+                }
+            });
+
+            telat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[2], kondisiShalat[2]);
+                }
+            });
+
+            tidakShalat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[2], kondisiShalat[3]);
+                }
+            });
+            statusShalat.setText("Bagaimana Shalat Asharmu?");
         } else if (jam >= 18 && jam < 19) {
-            mStatusShalat.setText("Bagaimana Shalat Maghribmu?");
+
+            jamaah.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[3], kondisiShalat[0]);
+                }
+            });
+            sendiri.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[3], kondisiShalat[1]);
+                }
+            });
+
+            telat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[3], kondisiShalat[2]);
+                }
+            });
+
+            tidakShalat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[3], kondisiShalat[3]);
+                }
+            });
+
+            statusShalat.setText("Bagaimana Shalat Maghribmu?");
         } else {
-            mStatusShalat.setText("Bagaimana Shalat Isya?");
+
+            jamaah.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[4], kondisiShalat[0]);
+                }
+            });
+            sendiri.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[4], kondisiShalat[1]);
+                }
+            });
+
+            telat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[4], kondisiShalat[2]);
+                }
+            });
+
+            tidakShalat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tambahkanDataShalat(namaShalat[4], kondisiShalat[3]);
+                }
+            });
+
+            statusShalat.setText("Bagaimana Shalat Isya?");
         }
     }
 
@@ -120,10 +256,10 @@ public class TambahkanShalatFragment extends Fragment {
     }
 
     private void initializeView() {
-        mJamaah = getView().findViewById(R.id.but_jamaah);
-        mSendiri = getView().findViewById(R.id.but_sendiri);
-        mTelat = getView().findViewById(R.id.but_telat);
-        mTidakShalat = getView().findViewById(R.id.but_tdkShalat);
-        mStatusShalat = getView().findViewById(R.id.tv_status_shalat);
+        jamaah = getView().findViewById(R.id.but_jamaah);
+        sendiri = getView().findViewById(R.id.but_sendiri);
+        telat = getView().findViewById(R.id.but_telat);
+        tidakShalat = getView().findViewById(R.id.but_tdkShalat);
+        statusShalat = getView().findViewById(R.id.tv_status_shalat);
     }
 }

@@ -54,15 +54,18 @@
                     android:layout_gravity="center"
                     android:layout_margin="15dp"
                     android:background="@drawable/radius"
+                    android:backgroundTint="#fff"
                     android:text="LOGIN" />
 
-                <TextView
+                <Button
                     android:id="@+id/SignUp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:background="#2dc9a0"
+                    android:textColor="#fff"
                     android:text="Doesn't Have An Account? Sign Up"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -14,11 +15,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     EditText etEmail, etUsername, etPassword;
     ProgressBar progressBar;
+    Button signUp, login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,26 +32,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar = findViewById(R.id.progressBar);
 
         mAuth = FirebaseAuth.getInstance();
+        signUp = findViewById(R.id.SignUp);
+        login = findViewById(R.id.btnLogin);
 
-        findViewById(R.id.SignUp).setOnClickListener(this);
-        findViewById(R.id.btnLogin).setOnClickListener(this);
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prosesMasukRegister();
+            }
+        });
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prosesLogin();
+            }
+        });
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.SignUp:
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-                break;
-            case R.id.btnLogin:
-                userLogin();
-                break;
-        }
-    }
-
-    private void userLogin() {
-
+    private void prosesLogin() {
         String S_email = etEmail.getText().toString().trim();
 
         if (S_email.isEmpty()) {
@@ -92,13 +93,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (mAuth.getCurrentUser() != null) {
-            finish();
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        }
+    private void prosesMasukRegister() {
+        Intent toRegister = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivity(toRegister);
     }
+
 }
