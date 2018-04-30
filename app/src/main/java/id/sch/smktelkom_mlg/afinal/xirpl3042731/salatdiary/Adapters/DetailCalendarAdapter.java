@@ -12,12 +12,12 @@ import java.util.List;
 
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
 
-public class DetailKalenderAdapter extends RecyclerView.Adapter<DetailKalenderAdapter.ViewHolder> {
+public class DetailCalendarAdapter extends RecyclerView.Adapter<DetailCalendarAdapter.ViewHolder> {
 
     private List<ListItem> listItems;
     private Context context;
 
-    public DetailKalenderAdapter(List<ListItem> listItems, Context context) {
+    public DetailCalendarAdapter(List<ListItem> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }
@@ -25,8 +25,8 @@ public class DetailKalenderAdapter extends RecyclerView.Adapter<DetailKalenderAd
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item)
+        View v;
+        v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, false);
         return new ViewHolder(v);
     }
 
@@ -41,13 +41,14 @@ public class DetailKalenderAdapter extends RecyclerView.Adapter<DetailKalenderAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         public TextView textViewHead;
         public TextView textViewDesc;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
-
+            textViewHead = itemView.findViewById(R.id.textViewHead);
+            textViewDesc = itemView.findViewById(R.id.textViewDesc);
         }
     }
 }
