@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Adapters.DetailCalendarListAdapter;
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Model.StatusShalatModel;
@@ -45,8 +46,8 @@ public class DetailCalendarActivity extends AppCompatActivity {
 
 
         tanggalHariIni = getIntent().getStringExtra("TANGGAL_HARI_INI");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyy");
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd-MM-yy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyy", Locale.ENGLISH);
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd-MM-yy", Locale.ENGLISH);
 
         try {
             Date date = dateFormat.parse(tanggalHariIni);
