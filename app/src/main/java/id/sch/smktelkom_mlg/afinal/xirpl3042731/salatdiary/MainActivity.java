@@ -8,6 +8,7 @@ import com.github.florent37.bubbletab.BubbleTab;
 
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Adapters.BubbleTabAdapter;
 
+
 public class MainActivity extends AppCompatActivity {
 
     BubbleTab bubbleTab;
