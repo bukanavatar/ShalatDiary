@@ -1,5 +1,6 @@
 package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -39,7 +40,9 @@ public class ProfileActivity extends AppCompatActivity {
     Button mSignOut;
 
     Uri uriProfileImage;
+    ProgressDialog pd;
     ProgressBar progressBar;
+
 
     String profileImageUrl;
 
@@ -50,6 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         mAuth = FirebaseAuth.getInstance();
+
 
         editText = findViewById(R.id.editTextDisplayName);
         imageView = findViewById(R.id.imageView);
@@ -64,13 +68,14 @@ public class ProfileActivity extends AppCompatActivity {
 
         loadUserInformation();
 
-
+        pd = new ProgressDialog(this);
         findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveUserInformation();
             }
         });
+
 
         findViewById(R.id.btnLogOut).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,16 +124,21 @@ public class ProfileActivity extends AppCompatActivity {
     private void saveUserInformation() {
 
 
+        pd.setMessage("Updating...");
+        pd.show();
+
         String displayName = editText.getText().toString();
         String displayUname = editText.getText().toString();
 
         if (displayName.isEmpty()) {
+            pd.dismiss();
             editText.setError("Name required");
             editText.requestFocus();
             return;
         }
 
         if (displayUname.isEmpty()) {
+            pd.dismiss();
             editText.setError("Uname required");
             editText.requestFocus();
             return;
@@ -137,6 +147,8 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
 
         if (user != null && profileImageUrl != null) {
+
+
             UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
                     .setDisplayName(displayName)
                     .setPhotoUri(Uri.parse(profileImageUrl))
@@ -147,7 +159,11 @@ public class ProfileActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+                                pd.dismiss();
                                 Toast.makeText(ProfileActivity.this, "Profile Updated", Toast.LENGTH_SHORT).show();
+                            } else {
+                                pd.dismiss();
+                                Toast.makeText(ProfileActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

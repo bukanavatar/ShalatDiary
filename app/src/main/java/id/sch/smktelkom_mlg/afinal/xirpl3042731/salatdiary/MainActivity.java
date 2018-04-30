@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeView();
+
         viewPager.setAdapter(new BubbleTabAdapter(getSupportFragmentManager()));
         bubbleTab.setupWithViewPager(viewPager);
     }
@@ -62,8 +63,10 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.profile:
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                return true;
             case R.id.about_us:
                 startActivity(new Intent(MainActivity.this, AboutUs.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
