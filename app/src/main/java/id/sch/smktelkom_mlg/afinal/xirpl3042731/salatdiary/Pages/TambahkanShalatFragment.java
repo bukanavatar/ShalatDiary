@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +40,7 @@ public class TambahkanShalatFragment extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-    Button mJamaah, mSendiri, mTelat, mTidakShalat;
+    ImageButton mJamaah, mSendiri, mTelat, mTidakShalat;
     TextView mStatusShalat;
 
     public TambahkanShalatFragment() {
