@@ -1,5 +1,6 @@
 package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Pages;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -17,6 +17,7 @@ import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.DetailCalendarActivity;
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
 
 
@@ -24,7 +25,6 @@ public class KalenderShalatFragment extends Fragment implements OnDateSelectedLi
 
     MaterialCalendarView widget;
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
-    TextView textView;
 
     public KalenderShalatFragment() {
         // Required empty public constructor
@@ -45,16 +45,16 @@ public class KalenderShalatFragment extends Fragment implements OnDateSelectedLi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        textView = getView().findViewById(R.id.textView);
         widget = getView().findViewById(R.id.calendarView);
         widget.setOnDateChangedListener(this);
         widget.setOnMonthChangedListener(this);
-        textView.setText(getSelectedDatesString());
     }
 
     @Override
     public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-        textView.setText(getSelectedDatesString());
+        Intent intent = new Intent(getActivity(), DetailCalendarActivity.class);
+        intent.putExtra("TANGGAL_HARI_INI", getSelectedDatesString());
+        startActivity(intent);
     }
 
     @Override
