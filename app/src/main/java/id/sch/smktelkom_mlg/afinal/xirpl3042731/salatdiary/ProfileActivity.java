@@ -52,7 +52,6 @@ public class ProfileActivity extends AppCompatActivity {
         editText = findViewById(R.id.editTextDisplayName);
         imageView = findViewById(R.id.imageView);
         progressBar = findViewById(R.id.progressbar);
-        textView = findViewById(R.id.textViewVerified);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
