@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -66,8 +65,8 @@ public class TambahkanShalatFragment extends Fragment {
     }
 
     private void buttonMenambahkanShalat() {
-        final String[] namaShalat = {"subuh", "dzuhur", "ashar", "maghrib", "isya"};
-        final String[] kondisiShalat = {"jamaah", "sendiri", "telat", "tidakShalat"};
+        final String[] namaShalat = {"Subuh", "Dzuhur", "Ashar", "Maghrib", "Isya"};
+        final String[] kondisiShalat = {"Jamaah", "Sendiri", "Telat", "Tidak Shalat"};
         if (jam >= 4 && jam < 12) {
 
             mJamaah.setOnClickListener(new View.OnClickListener() {
@@ -220,12 +219,14 @@ public class TambahkanShalatFragment extends Fragment {
 
     private void tambahkanDataShalat(String namaShalat, String kondisiShalat) {
         Map<String, Object> dataShalat = new HashMap<>();
-        dataShalat.put(namaShalat, kondisiShalat);
+        dataShalat.put("nama", namaShalat);
+        dataShalat.put("status", kondisiShalat);
 
 
         db.collection("dataShalat").document(email)
                 .collection("tanggal").document(dateFormatted)
-                .set(dataShalat, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                .collection("statusShalat").document(namaShalat)
+                .set(dataShalat).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
