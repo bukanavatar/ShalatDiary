@@ -8,12 +8,10 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +28,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -40,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView textView;
     ImageView imageView;
     EditText editText;
-    Spinner dropdownmenu;
+    Button mSignOut;
 
     Uri uriProfileImage;
     ProgressBar progressBar;
@@ -58,27 +54,6 @@ public class ProfileActivity extends AppCompatActivity {
         editText = findViewById(R.id.editTextDisplayName);
         imageView = findViewById(R.id.imageView);
         progressBar = findViewById(R.id.progressbar);
-        dropdownmenu = findViewById(R.id.Spinner1);
-
-        List<String> list = new ArrayList<>();
-        list.add("Perempuan");
-        list.add("Laki-laki");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropdownmenu.setAdapter(adapter);
-        dropdownmenu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String itemvalue = parent.getItemAtPosition(position).toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,14 +64,21 @@ public class ProfileActivity extends AppCompatActivity {
 
         loadUserInformation();
 
+
         findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveUserInformation();
             }
         });
-    }
 
+        findViewById(R.id.btnLogOut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userlogout();
+            }
+        });
+    }
 
     @Override
     protected void onStart() {
@@ -121,17 +103,33 @@ public class ProfileActivity extends AppCompatActivity {
                 editText.setText(user.getDisplayName());
             }
 
+
         }
     }
 
+    public void userlogout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent i = new Intent(ProfileActivity.this, LoginActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        finish();
+
+    }
 
     private void saveUserInformation() {
 
 
         String displayName = editText.getText().toString();
+        String displayUname = editText.getText().toString();
 
         if (displayName.isEmpty()) {
             editText.setError("Name required");
+            editText.requestFocus();
+            return;
+        }
+
+        if (displayUname.isEmpty()) {
+            editText.setError("Uname required");
             editText.requestFocus();
             return;
         }
@@ -173,6 +171,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
     }
+
 
     private void uploadImageToFirebaseStorage() {
         StorageReference profileImageRef =
