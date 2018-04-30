@@ -52,12 +52,6 @@
             android:padding="16dp"
             android:src="@drawable/bubbletab_date" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="16dp"
-            android:src="@drawable/bubbletab_person" />
 
     </com.github.florent37.bubbletab.BubbleTab>
 
