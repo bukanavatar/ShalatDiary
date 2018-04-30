@@ -1,19 +1,29 @@
 package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Adapters;
 
-public class DetailKalenderAdapter {
-    private String head;
-    private String desc;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
 
-    public DetailKalenderAdapter(String head, String desc) {
-        this.head = head;
-        this.desc = desc;
+public class DetailKalenderAdapter extends RecyclerView.Adapter<DetailKalenderAdapter.ViewHolder> {
+
+    @Override
+    public DetailKalenderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return null;
     }
 
-    public String getHead() {
-        return head;
+    @Override
+    public void onBindViewHolder(DetailKalenderAdapter.ViewHolder holder, int position) {
+
     }
 
-    public String getDesc() {
-        return desc;
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public ViewHolder(View itemView) {
+            super(itemView);
+        }
     }
 }
