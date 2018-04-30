@@ -81,6 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
                 editText.setText(user.getDisplayName());
             }
         }
+    }
 
         @Override
         protected void onStart () {
@@ -171,4 +172,3 @@ public class ProfileActivity extends AppCompatActivity {
             startActivityForResult(Intent.createChooser(intent, "Select Profile Photo"), CHOOSE_IMAGE);
         }
     }
-}

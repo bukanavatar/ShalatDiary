@@ -22,7 +22,7 @@
             android:layout_height="170dp"
             android:layout_centerHorizontal="true"
             android:layout_margin="20dp"
-            android:background="@drawable/bio"
+
             android:scaleType="centerCrop" />
 
         <ProgressBar
