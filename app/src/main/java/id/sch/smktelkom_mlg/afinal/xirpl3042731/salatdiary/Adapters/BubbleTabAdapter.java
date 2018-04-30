@@ -30,7 +30,7 @@ public class BubbleTabAdapter extends FragmentStatePagerAdapter {
             case 4:
                 return ProfilFragment.newInstance();
             default:
-                return null;
+                return JadwalShalatFragment.newInstance();
         }
     }
 

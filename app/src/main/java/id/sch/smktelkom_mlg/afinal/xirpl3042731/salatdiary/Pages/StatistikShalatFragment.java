@@ -4,13 +4,22 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
 
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
 
@@ -19,6 +28,7 @@ public class StatistikShalatFragment extends Fragment {
 
 
     PieChart mHalfPieChart;
+    String[] statusShalat = {"Jamaah", "Sendiri", "Telat", "Tidak Shalat"};
 
     public StatistikShalatFragment() {
         // Required empty public constructor
@@ -83,5 +93,43 @@ public class StatistikShalatFragment extends Fragment {
 
         setHalfPieChartData(4, 5);
         moveOffScreen();
+    }
+
+    public void moveOffScreen() {
+
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        int height = display.getHeight();  // deprecated
+
+        int offset = (int) (height * 0.001); /* percent to move */
+
+        RelativeLayout.LayoutParams rlParams =
+                (RelativeLayout.LayoutParams) mHalfPieChart.getLayoutParams();
+        rlParams.setMargins(0, 0, 0, -offset);
+        mHalfPieChart.setLayoutParams(rlParams);
+    }
+
+    public void setHalfPieChartData(int count, int range) {
+        ArrayList<PieEntry> values = new ArrayList<>();
+
+
+        values.add(new PieEntry(1, statusShalat[0]));
+        values.add(new PieEntry(2, statusShalat[1]));
+        values.add(new PieEntry(2, statusShalat[2]));
+        values.add(new PieEntry(1, statusShalat[3]));
+
+
+        PieDataSet dataSet = new PieDataSet(values, "");
+        dataSet.setSelectionShift(5f);
+        dataSet.setSliceSpace(3f);
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+
+        PieData pieData = new PieData(dataSet);
+        pieData.setValueFormatter(new PercentFormatter());
+        pieData.setValueTextSize(15f);
+        pieData.setValueTextColor(Color.WHITE);
+
+        mHalfPieChart.setData(pieData);
+        mHalfPieChart.invalidate();
+
     }
 }
