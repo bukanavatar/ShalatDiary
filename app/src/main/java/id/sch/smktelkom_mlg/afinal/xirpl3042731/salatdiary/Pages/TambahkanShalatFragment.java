@@ -1,5 +1,6 @@
 package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Pages;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,6 +40,8 @@ public class TambahkanShalatFragment extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
+    private ProgressDialog mProd;
+
     ImageButton mJamaah, mSendiri, mTelat, mTidakShalat;
     TextView mStatusShalat;
 
@@ -61,6 +64,7 @@ public class TambahkanShalatFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeView();
+        mProd = new ProgressDialog(getContext());
         buttonMenambahkanShalat();
     }
 
@@ -184,7 +188,7 @@ public class TambahkanShalatFragment extends Fragment {
             });
 
             mStatusShalat.setText("Bagaimana Shalat Maghribmu?");
-        } else if (jam >= 19 && jam < 4) {
+        } else {
 
             mJamaah.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -222,7 +226,9 @@ public class TambahkanShalatFragment extends Fragment {
         dataShalat.put("nama", namaShalat);
         dataShalat.put("status", kondisiShalat);
 
-
+        mProd.setMessage("Menambahkan...");
+        mProd.setCancelable(false);
+        mProd.show();
         db.collection("dataShalat").document(email)
                 .collection("tanggal").document(dateFormatted)
                 .collection("statusShalat").document(namaShalat)
@@ -231,9 +237,10 @@ public class TambahkanShalatFragment extends Fragment {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(getActivity(), "Berhasil Menambahkan", Toast.LENGTH_LONG).show();
+                    mProd.dismiss();
                 } else {
-                    Toast.makeText(getActivity(), task.getException().getMessage()
-                            , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    mProd.dismiss();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
