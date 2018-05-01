@@ -24,6 +24,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//import android.widget.Toast;
+
 
 
 public class JadwalShalatFragment extends Fragment {
@@ -82,7 +84,7 @@ public class JadwalShalatFragment extends Fragment {
             @Override
             public void onFailure(Call<JadwalShalatModel> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), "Maaf ada kesalahan", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Maaf Ada Kesalahan", Toast.LENGTH_LONG).show();
             }
         });
     }
