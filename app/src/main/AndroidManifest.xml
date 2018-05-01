@@ -19,7 +19,6 @@
         <activity android:name=".SignUpActivity">
         </activity>
         <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".Pages.ProfilFragment" />
         <activity android:name=".ProfileActivity" />
         <activity
             android:name=".DetailCalendarActivity"
