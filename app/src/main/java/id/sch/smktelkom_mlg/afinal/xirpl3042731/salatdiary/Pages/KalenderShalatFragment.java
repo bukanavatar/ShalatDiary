@@ -16,6 +16,7 @@ import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.DetailCalendarActivity;
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
@@ -24,7 +25,7 @@ import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
 public class KalenderShalatFragment extends Fragment implements OnDateSelectedListener, OnMonthChangedListener {
 
     MaterialCalendarView widget;
-    private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
+    private static final DateFormat FORMATTER = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
 
     public KalenderShalatFragment() {
         // Required empty public constructor

@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
@@ -34,7 +35,7 @@ public class TambahkanShalatFragment extends Fragment {
     int jam = waktuSekarang.get(Calendar.HOUR_OF_DAY);
     //Tanggal Sekarang
     Date tanggalSekarang = Calendar.getInstance().getTime();
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy", Locale.ENGLISH);
     String dateFormatted = simpleDateFormat.format(tanggalSekarang);
     //Firestore
     FirebaseFirestore db = FirebaseFirestore.getInstance();

@@ -2,8 +2,10 @@ package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Pages;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,17 +20,34 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 public class StatistikShalatFragment extends Fragment {
 
 
     PieChart mHalfPieChart;
+    final String[] namaShalat = {"Subuh", "Dzuhur", "Ashar", "Maghrib", "Isya"};
     String[] statusShalat = {"Jamaah", "Sendiri", "Telat", "Tidak Shalat"};
+    FirebaseFirestore db;
+    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    Date tanggalSekarang = Calendar.getInstance().getTime();
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy");
+    String dateFormatted = simpleDateFormat.format(tanggalSekarang);
 
     public StatistikShalatFragment() {
         // Required empty public constructor
@@ -95,6 +114,24 @@ public class StatistikShalatFragment extends Fragment {
         moveOffScreen();
     }
 
+    public void getFirebaseTodayData() {
+        db = FirebaseFirestore.getInstance();
+        db.collection("dataShalat").document(email)
+                .collection("tanggal").document(dateFormatted)
+                .collection("statusShalat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData());
+                    }
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+
+            }
+        });
+    }
     public void moveOffScreen() {
 
         Display display = getActivity().getWindowManager().getDefaultDisplay();
