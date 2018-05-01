@@ -3,28 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Pages.JadwalShalatFragment">
+    android:id="@+id/ly_jadwal_shalat"
+    tools:context="com.bukanavatar.shalatdiary.ShalatPages.JadwalShalat">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.75">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-        <TextClock
-            android:layout_width="wrap_content"
+        <ProgressBar
+            android:id="@+id/pb_jadwalShalat"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.25"
-        android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_jadwal_sholat"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>
