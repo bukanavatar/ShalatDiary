@@ -22,9 +22,9 @@ public class SliderAdapter extends PagerAdapter {
             "Build Your Iman", "Keep a Diary", "Intropeksi"
     };
     public String[] slide_decs = {
-            "jhdkhdkskd",
-            "sjhdkhdkdk",
-            "djskdjsjds"
+            "Help you to control your daily salat",
+            "Easy way to use diary with just a tap and store the data safely",
+            "Know the progress of your salat in order to reflect faith quality"
     };
     Context context;
     LayoutInflater layoutInflater;

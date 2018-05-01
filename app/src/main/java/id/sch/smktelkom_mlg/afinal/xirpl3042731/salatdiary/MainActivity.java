@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.profile:
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
             case R.id.about_us:
-
+                startActivity(new Intent(MainActivity.this, AboutUs.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
