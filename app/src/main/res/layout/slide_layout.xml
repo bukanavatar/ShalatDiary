@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/slide_image"
-        android:layout_width="173dp"
-        android:layout_height="173dp"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
@@ -20,6 +20,7 @@
         android:layout_centerInParent="true"
         android:text="HEADING"
         android:textSize="20sp"
+        android:textColor="#FFFF"
         android:textStyle="bold" />
 
     <TextView
@@ -29,5 +30,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="221dp"
+        android:textColor="#FFFF"
         android:text="TextView" />
 </RelativeLayout>
