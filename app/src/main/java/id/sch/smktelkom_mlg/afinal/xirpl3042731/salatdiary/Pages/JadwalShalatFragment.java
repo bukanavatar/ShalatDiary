@@ -64,12 +64,13 @@ public class JadwalShalatFragment extends Fragment {
         tanggalsekarang = getView().findViewById(R.id.tanggalsekarang);
         tanggalsekarang.setText(dateFormatted);
 
+        retrofitJadwalShalat();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        retrofitJadwalShalat();
+
     }
 
     private void retrofitJadwalShalat() {

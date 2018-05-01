@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.github.florent37.bubbletab.BubbleTab;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +39,25 @@ public class MainActivity extends AppCompatActivity {
         firebaseLogin();
 
         mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.profile:
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            case R.id.about_us:
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void firebaseLogin() {
