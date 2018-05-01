@@ -33,7 +33,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_sign_up);
 
         etEmail = findViewById(R.id.etEmail);
-        etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         progressBar = findViewById(R.id.progressBar);
         btnSignUp = findViewById(R.id.btnSignup);
@@ -52,8 +51,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 registerUser();
                 break;
             case R.id.Login:
-                finish();
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                 break;
         }
     }
@@ -103,7 +101,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if (task.isSuccessful()) {
                     progressBar.setVisibility(View.INVISIBLE);
                     finish();
-                    startActivity(new Intent(SignUpActivity.this, ProfileActivity.class));
+                    startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
 
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {

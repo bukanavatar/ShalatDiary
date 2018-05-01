@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.SignUp:
-                startActivity(new Intent(this, SignUpActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
                 break;
             case R.id.btnLogin:
                 userLogin();
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (mAuth.getCurrentUser() != null) {
             finish();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
         }
     }
 }
