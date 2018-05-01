@@ -4,24 +4,67 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/ly_jadwal_shalat"
-    tools:context="com.bukanavatar.shalatdiary.ShalatPages.JadwalShalat">
+    android:weightSum="10"
+    tools:context="id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Pages.JadwalShalatFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_weight="9"
+        android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/pb_jadwalShalat"
-            style="?android:attr/progressBarStyle"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_jadwal_sholat"
+            <TextClock
+                android:id="@+id/textclock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="45dp" />
+
+            <TextView
+                android:id="@+id/tanggalsekarang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="25 mei 2018"
+                android:textSize="25dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
 
+                <ProgressBar
+                    android:id="@+id/pb_jadwalShalat"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_jadwal_sholat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </ScrollView>
+
+    </LinearLayout>
 </LinearLayout>
+

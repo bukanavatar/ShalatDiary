@@ -10,9 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Adapters.JadwalShalatAdapter;
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Model.DataJadwalShalatModel;
@@ -35,6 +39,10 @@ public class JadwalShalatFragment extends Fragment {
     LinearLayout linearLayout;
 
     private ApiService apiService;
+    TextView tanggalsekarang;
+    Date tanggalSekarang = Calendar.getInstance().getTime();
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
+    String dateFormatted = simpleDateFormat.format(tanggalSekarang);
 
     public JadwalShalatFragment() {
         // Required empty public constructor
@@ -53,6 +61,8 @@ public class JadwalShalatFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tanggalsekarang = getView().findViewById(R.id.tanggalsekarang);
+        tanggalsekarang.setText(dateFormatted);
 
     }
 
