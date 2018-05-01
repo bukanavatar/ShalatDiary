@@ -14,12 +14,12 @@ import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
 public class SliderAdapter extends PagerAdapter {
 
     public int[] slide_images = {
-            R.drawable.eat_icon,
-            R.drawable.sleep_icon,
-            R.drawable.code_icon
+            R.drawable.slider01,
+            R.drawable.slider02,
+            R.drawable.slider03
     };
     public String[] slide_headings = {
-            "EAT", "SLEEP", "CODE"
+            "Build Your Iman", "Keep a Diary", "Intropeksi"
     };
     public String[] slide_decs = {
             "jhdkhdkskd",

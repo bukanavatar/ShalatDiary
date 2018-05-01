@@ -76,19 +76,14 @@ public class TambahkanShalatFragment extends Fragment {
         final String[] kondisiShalat = {"Jamaah", "Sendiri", "Telat", "Tidak Shalat"};
         //tinggal gambar
         if (jam >= 4 && jam < 12) {
-            // mainpage.setBackgroundResource(R.drawable.yourimage);
             mStatusShalat.setText("Bagaimana Shalat Subuhmu?");
         } else if (jam >= 12 && jam < 15) {
-            //  mainpage.setBackgroundResource(R.drawable.yourimage);
             mStatusShalat.setText("Bagaimana Shalat Dzuhurmu?");
         } else if (jam >= 15 && jam < 18) {
-            // mainpage.setBackgroundResource(R.drawable.yourimage);
             mStatusShalat.setText("Bagaimana Shalat Asharmu?");
         } else if (jam >= 18 && jam < 19) {
-            // mainpage.setBackgroundResource(R.drawable.yourimage);
             mStatusShalat.setText("Bagaimana Shalat Maghribmu?");
         } else {
-            // mainpage.setBackgroundResource(R.drawable.yourimage);
             mStatusShalat.setText("Bagaimana Shalat Isya?");
         }
     }
