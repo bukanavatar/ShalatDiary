@@ -5,14 +5,21 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class JadwalShalatModel {
-    @SerializedName("data")
-    private ArrayList<JadwalShalatModel> JadwalShalatModels = new ArrayList<>();
 
-    public ArrayList<JadwalShalatModel> getJadwalShalatModels() {
-        return JadwalShalatModels;
+    @SerializedName("items")
+    private ArrayList<DataJadwalShalatModel> items;
+
+    public JadwalShalatModel(ArrayList<DataJadwalShalatModel> items) {
+        this.items = items;
     }
 
-    public void setJadwalShalatModels(ArrayList<JadwalShalatModel> jadwalShalatModels) {
-        JadwalShalatModels = jadwalShalatModels;
+    public ArrayList<DataJadwalShalatModel> getItems() {
+        return items;
     }
+
+    public void setItems(ArrayList<DataJadwalShalatModel> items) {
+        this.items = items;
+    }
+
 }
+

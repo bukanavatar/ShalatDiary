@@ -2,80 +2,87 @@ package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DataJadwalShalatModel {
-    List<String> namaShalat = new ArrayList<>();
-    String[] listShalat = {"Subuh", "Dzuhur", "Ashar", "Margrib", "Isya"};
-    @SerializedName("Fajr")
-    private String Fajr;
-    @SerializedName("Sunrise")
-    private String Sunrise;
-    @SerializedName("Dhuhr")
-    private String Dhuhr;
-    @SerializedName("Asr")
-    private String Asr;
-    @SerializedName("Maghrib")
-    private String Maghrib;
-    @SerializedName("Isha")
-    private String Isha;
+    @SerializedName("date_for")
+    private String dateFor;
+    @SerializedName("fajr")
+    private String fajr;
+    @SerializedName("shurooq")
+    private String shurooq;
+    @SerializedName("dhuhr")
+    private String dhuhr;
+    @SerializedName("asr")
+    private String asr;
+    @SerializedName("maghrib")
+    private String maghrib;
+    @SerializedName("isha")
+    private String isha;
 
-    public DataJadwalShalatModel(String fajr, String sunrise, String dhuhr, String asr, String maghrib, String isha) {
-        Fajr = fajr;
-        Sunrise = sunrise;
-        Dhuhr = dhuhr;
-        Asr = asr;
-        Maghrib = maghrib;
-        Isha = isha;
+    public DataJadwalShalatModel(String dateFor, String fajr, String shurooq, String dhuhr, String asr, String maghrib, String isha) {
+        this.dateFor = dateFor;
+        this.fajr = fajr;
+        this.shurooq = shurooq;
+        this.dhuhr = dhuhr;
+        this.asr = asr;
+        this.maghrib = maghrib;
+        this.isha = isha;
+    }
+
+    public String getDateFor() {
+        return dateFor;
+    }
+
+    public void setDateFor(String dateFor) {
+        this.dateFor = dateFor;
     }
 
     public String getFajr() {
-        return Fajr;
+        return fajr;
     }
 
     public void setFajr(String fajr) {
-        Fajr = fajr;
+        this.fajr = fajr;
     }
 
-    public String getSunrise() {
-        return Sunrise;
+    public String getShurooq() {
+        return shurooq;
     }
 
-    public void setSunrise(String sunrise) {
-        Sunrise = sunrise;
+    public void setShurooq(String shurooq) {
+        this.shurooq = shurooq;
     }
 
     public String getDhuhr() {
-        return Dhuhr;
+        return dhuhr;
     }
 
     public void setDhuhr(String dhuhr) {
-        Dhuhr = dhuhr;
+        this.dhuhr = dhuhr;
     }
 
     public String getAsr() {
-        return Asr;
+        return asr;
     }
 
     public void setAsr(String asr) {
-        Asr = asr;
+        this.asr = asr;
     }
 
     public String getMaghrib() {
-        return Maghrib;
+        return maghrib;
     }
 
     public void setMaghrib(String maghrib) {
-        Maghrib = maghrib;
+        this.maghrib = maghrib;
     }
 
     public String getIsha() {
-        return Isha;
+        return isha;
     }
 
     public void setIsha(String isha) {
-        Isha = isha;
+        this.isha = isha;
     }
 }
+
 
