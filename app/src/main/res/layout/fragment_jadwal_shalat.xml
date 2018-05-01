@@ -9,13 +9,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="9"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
             <TextClock
                 android:id="@+id/textclock"
@@ -23,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:textSize="45dp" />
+                android:textSize="40dp" />
 
             <TextView
                 android:id="@+id/tanggalsekarang"
@@ -32,7 +33,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:text="25 mei 2018"
-                android:textSize="25dp" />
+                android:textSize="15dp" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -40,7 +41,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="vertical">
 
         <ScrollView
