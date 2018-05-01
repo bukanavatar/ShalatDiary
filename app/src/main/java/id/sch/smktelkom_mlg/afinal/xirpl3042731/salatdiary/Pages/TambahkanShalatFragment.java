@@ -228,8 +228,8 @@ public class TambahkanShalatFragment extends Fragment {
         dataShalat.put("status", kondisiShalat);
 
         mProd.setMessage("Menambahkan...");
-        mProd.setCancelable(false);
         mProd.show();
+
         db.collection("dataShalat").document(email)
                 .collection("tanggal").document(dateFormatted)
                 .collection("statusShalat").document(namaShalat)

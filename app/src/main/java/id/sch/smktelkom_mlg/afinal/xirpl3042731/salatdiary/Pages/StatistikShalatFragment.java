@@ -30,7 +30,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Locale;
 
 import id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.R;
 
@@ -41,16 +43,53 @@ public class StatistikShalatFragment extends Fragment {
 
 
     PieChart mHalfPieChart;
-    final String[] namaShalat = {"Subuh", "Dzuhur", "Ashar", "Maghrib", "Isya"};
-    String[] statusShalat = {"Jamaah", "Sendiri", "Telat", "Tidak Shalat"};
-    FirebaseFirestore db;
+    FirebaseFirestore mFirebaseFirestore;
     String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
     Date tanggalSekarang = Calendar.getInstance().getTime();
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy", Locale.ENGLISH);
     String dateFormatted = simpleDateFormat.format(tanggalSekarang);
 
+    ArrayList<String> statusShalatDialy = new ArrayList<String>();
+    int jamaah;
+    int sendiri;
+    int telat;
+    int tidakShalat;
+
     public StatistikShalatFragment() {
-        // Required empty public constructor
+
+    }
+
+    public int getJamaah() {
+        return jamaah;
+    }
+
+    public void setJamaah(int jamaah) {
+        this.jamaah = jamaah;
+    }
+
+    public int getSendiri() {
+        return sendiri;
+    }
+
+    public void setSendiri(int sendiri) {
+        this.sendiri = sendiri;
+    }
+
+    public int getTelat() {
+        return telat;
+    }
+
+    public void setTelat(int telat) {
+        this.telat = telat;
+    }
+
+    public int getTidakShalat() {
+        return tidakShalat;
+    }
+
+    public void setTidakShalat(int tidakShalat) {
+        this.tidakShalat = tidakShalat;
     }
 
     public static StatistikShalatFragment newInstance() {
@@ -64,9 +103,39 @@ public class StatistikShalatFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initializeHalfChart();
+        getDialyShalat();
+
+    }
+
+    private void getDialyShalat() {
+        mFirebaseFirestore = FirebaseFirestore.getInstance();
+
+        mFirebaseFirestore.collection("dataShalat").document(email)
+                .collection("tanggal").document(dateFormatted)
+                .collection("statusShalat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot doc : task.getResult()) {
+
+                        statusShalatDialy.add(doc.getString("status"));
+                        Log.d(TAG, "Jumlah Array: " + statusShalatDialy.size());
+
+                        setJamaah(Collections.frequency(statusShalatDialy, "Jamaah"));
+                        setSendiri(Collections.frequency(statusShalatDialy, "Sendiri"));
+                        setTelat(Collections.frequency(statusShalatDialy, "Telat"));
+                        setTidakShalat(Collections.frequency(statusShalatDialy, "Tidak Shalat"));
+
+                        setHalfPieChartData(getJamaah(), getSendiri(), getTelat(), getTidakShalat());
+                        mHalfPieChart.notifyDataSetChanged();
+                        Log.d(TAG, "Jumlah Tidak Shalat AAA: " + getTidakShalat());
+                    }
+                }
+            }
+        });
     }
 
     private void initializeHalfChart() {
@@ -110,50 +179,17 @@ public class StatistikShalatFragment extends Fragment {
         mHalfPieChart.setEntryLabelColor(Color.WHITE);
         mHalfPieChart.setEntryLabelTextSize(12f);
 
-        setHalfPieChartData(4, 5);
         moveOffScreen();
     }
 
-    public void getFirebaseTodayData() {
-        db = FirebaseFirestore.getInstance();
-        db.collection("dataShalat").document(email)
-                .collection("tanggal").document(dateFormatted)
-                .collection("statusShalat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot document : task.getResult()) {
-                        Log.d(TAG, document.getId() + " => " + document.getData());
-                    }
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                }
-
-            }
-        });
-    }
-    public void moveOffScreen() {
-
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        int height = display.getHeight();  // deprecated
-
-        int offset = (int) (height * 0.001); /* percent to move */
-
-        RelativeLayout.LayoutParams rlParams =
-                (RelativeLayout.LayoutParams) mHalfPieChart.getLayoutParams();
-        rlParams.setMargins(0, 0, 0, -offset);
-        mHalfPieChart.setLayoutParams(rlParams);
-    }
-
-    public void setHalfPieChartData(int count, int range) {
+    public void setHalfPieChartData(int jamaah, int sendiri, int telat, int tidakShalat) {
         ArrayList<PieEntry> values = new ArrayList<>();
 
-
-        values.add(new PieEntry(1, statusShalat[0]));
-        values.add(new PieEntry(2, statusShalat[1]));
-        values.add(new PieEntry(2, statusShalat[2]));
-        values.add(new PieEntry(1, statusShalat[3]));
-
+        values.add(new PieEntry(jamaah, "Jamaah"));
+        values.add(new PieEntry(sendiri, "Sendiri"));
+        values.add(new PieEntry(telat, "Telat"));
+        values.add(new PieEntry(tidakShalat, "Tidak Shalat"));
+        Log.d(TAG, "Jumlah Tidak Shalat A: " + tidakShalat);
 
         PieDataSet dataSet = new PieDataSet(values, "");
         dataSet.setSelectionShift(5f);
@@ -166,7 +202,22 @@ public class StatistikShalatFragment extends Fragment {
         pieData.setValueTextColor(Color.WHITE);
 
         mHalfPieChart.setData(pieData);
+
         mHalfPieChart.invalidate();
+
+    }
+
+    public void moveOffScreen() {
+
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        int height = display.getHeight();  // deprecated
+
+        int offset = (int) (height * 0.001); /* percent to move */
+
+        RelativeLayout.LayoutParams rlParams =
+                (RelativeLayout.LayoutParams) mHalfPieChart.getLayoutParams();
+        rlParams.setMargins(0, 0, 0, -offset);
+        mHalfPieChart.setLayoutParams(rlParams);
 
     }
 }
