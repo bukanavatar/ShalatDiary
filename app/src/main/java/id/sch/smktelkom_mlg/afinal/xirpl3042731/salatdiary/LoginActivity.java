@@ -55,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         String S_password = etPassword.getText().toString().trim();
 
         if (S_email.isEmpty()) {
-            etUsername.setError("Username is required");
-            etUsername.requestFocus();
+            etEmail.setError("Email is required");
+            etEmail.requestFocus();
             return;
         } else if (S_password.isEmpty()) {
             etPassword.setError("Password is required");
