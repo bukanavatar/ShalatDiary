@@ -14,14 +14,14 @@
         <activity android:name=".SignUpActivity"></activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".ProfileActivity" />
         <activity
             android:name=".DetailCalendarActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".IntroSliderActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
