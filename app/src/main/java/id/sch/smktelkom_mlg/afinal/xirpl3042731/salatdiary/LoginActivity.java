@@ -52,45 +52,41 @@ public class LoginActivity extends AppCompatActivity {
 
     private void prosesLogin() {
         String S_email = etEmail.getText().toString().trim();
+        String S_password = etPassword.getText().toString().trim();
 
         if (S_email.isEmpty()) {
             etUsername.setError("Username is required");
             etUsername.requestFocus();
             return;
-        }
-
-        String S_password = etPassword.getText().toString().trim();
-
-        if (S_password.isEmpty()) {
+        } else if (S_password.isEmpty()) {
             etPassword.setError("Password is required");
             etPassword.requestFocus();
             return;
-        }
-
-        if (S_password.length() < 6) {
+        } else if (S_password.length() < 6) {
             etPassword.setError("Minimum length of password should be 6");
             etPassword.requestFocus();
             return;
-        }
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
 
-        progressBar.setVisibility(View.VISIBLE);
+            mAuth.signInWithEmailAndPassword(S_email, S_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    progressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
 
-        mAuth.signInWithEmailAndPassword(S_email, S_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                progressBar.setVisibility(View.GONE);
-                if (task.isSuccessful()) {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
 
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-
-                } else {
-                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+
+        }
 
     }
 
