@@ -24,34 +24,36 @@
         app:bubbleTab_circleColor="@color/colorPrimary"
         app:bubbleTab_circleRatio="1.25">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="16dp"
-            android:src="@drawable/bubbletab_clock" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="16dp"
-            android:src="@drawable/bubbletab_statistik" />
+            android:src="@drawable/bubbletab_tambah_selector" />
+
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="16dp"
-            android:src="@drawable/bubbletab_tambah" />
+            android:src="@drawable/bubbletab_date_selector" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="16dp"
-            android:src="@drawable/bubbletab_date" />
+            android:src="@drawable/bubbletab_statistik_selector" />
 
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:src="@drawable/bubbletab_clock_selector" />
 
     </com.github.florent37.bubbletab.BubbleTab>
 
