@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,12 +38,15 @@ public class JadwalShalatFragment extends Fragment {
     RecyclerView mRecyclerView;
     ProgressBar progressBar;
     LinearLayout linearLayout;
+    Calendar waktuSekarang = Calendar.getInstance();
+    int jam = waktuSekarang.get(Calendar.HOUR_OF_DAY);
 
     private ApiService apiService;
     TextView tanggalsekarang;
     Date tanggalSekarang = Calendar.getInstance().getTime();
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
     String dateFormatted = simpleDateFormat.format(tanggalSekarang);
+    RelativeLayout RelativeLayout;
 
     public JadwalShalatFragment() {
         // Required empty public constructor
@@ -65,7 +69,29 @@ public class JadwalShalatFragment extends Fragment {
         tanggalsekarang.setText(dateFormatted);
 
         retrofitJadwalShalat();
+        gantibackground();
 
+        RelativeLayout rl = getView().findViewById(R.id.layout_bg);
+
+    }
+
+    private void gantibackground() {
+        if (jam >= 4 && jam < 12) {
+
+            rl.setBackground( @drawable/bg_subuh)
+        } else if (jam >= 12 && jam < 15) {
+
+            rl.setBackground( @drawable/bg_duhur)
+        } else if (jam >= 15 && jam < 18) {
+
+            rl.setBackground( @drawable/bg_ashar)
+        } else if (jam >= 18 && jam < 19) {
+
+            rl.setBackground( @drawable/bg_maghrib)
+        } else {
+
+            rl.setBackground( @drawable/bg_isya)
+        }
     }
 
     @Override
