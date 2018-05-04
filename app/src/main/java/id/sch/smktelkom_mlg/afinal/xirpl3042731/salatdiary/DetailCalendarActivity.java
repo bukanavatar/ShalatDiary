@@ -58,6 +58,7 @@ public class DetailCalendarActivity extends AppCompatActivity {
             mRv.setLayoutManager(new LinearLayoutManager(this));
             mRv.setAdapter(detailCalendarListAdapter);
 
+
             mFirebaseFirestore = FirebaseFirestore.getInstance();
 
             mFirebaseFirestore.collection("dataShalat").document(email)

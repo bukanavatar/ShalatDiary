@@ -49,6 +49,7 @@ public class TambahkanShalatFragment extends Fragment {
     TextView statusShalat;
     CardView mainpage;
 
+
     public TambahkanShalatFragment() {
 
     }
