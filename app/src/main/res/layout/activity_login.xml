@@ -3,35 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative_login"
+    android:background="@drawable/bglogin"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/logo_login"
-        android:layout_width="98dp"
-        android:layout_height="91dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/logops" />
-
-    <TextView
-        android:id="@+id/tv_welcome"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logo_login"
-        android:layout_marginTop="16dp"
-        android:text="Welcome Back , "
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        android:layout_above="@+id/layout_register"
+        android:padding="32dp">
 
-    <TextView
-        android:id="@+id/tv_singin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_welcome"
-        android:layout_marginTop="8dp"
-        android:text="Sign in to Salat Diary" />
+        <ImageView
+            android:id="@+id/logo_login"
+            android:layout_width="98dp"
+            android:layout_height="91dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/logops" />
+
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo_login"
+            android:layout_marginTop="16dp"
+            android:text="Selamat Datang, "
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_singin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_welcome"
+            android:layout_marginTop="8dp"
+            android:text="Silahkan Login"
+            android:textColor="#000" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,8 +52,9 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true">
+                android:id="@+id/til_email"
+                android:layout_marginBottom="8dp"
+                app:errorEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
@@ -56,54 +67,68 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
+                android:id="@+id/til_password"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true">
+                android:layout_marginBottom="8dp"
+                app:errorEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
+                    android:id="@+id/etPassword"
                     android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                    android:id="@+id/btnLogin"
+                android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="15dp"
+                android:layout_gravity="center"
+                android:padding="20dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:shadowColor="@color/colorPrimaryDark"
                 android:text="LOGIN"
                 android:textColor="#ffff" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="8dp"
-                android:textAlignment="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="New User ?" />
-
-                <TextView
-                    android:id="@+id/SignUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#ffff"
-                    android:text="Sign Up"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-
-                    />
-            </LinearLayout>
-
         </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:padding="14dp"
+        android:textAlignment="center">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/userBaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Baru? "
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/SignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/userBaru"
+                android:text="Register"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

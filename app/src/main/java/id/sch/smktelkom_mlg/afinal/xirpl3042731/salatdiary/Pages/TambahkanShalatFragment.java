@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -40,13 +41,14 @@ public class TambahkanShalatFragment extends Fragment {
     String dateFormatted = simpleDateFormat.format(tanggalSekarang);
     //Firestore
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     private ProgressDialog mProd;
 
     Button jamaah, sendiri, telat, tidakShalat;
     TextView statusShalat;
     CardView mainpage;
+
 
     public TambahkanShalatFragment() {
 
@@ -68,10 +70,14 @@ public class TambahkanShalatFragment extends Fragment {
 
         initializeView();
         mProd = new ProgressDialog(getContext());
-        buttonMenambahkanShalat();
+        if (user != null) {
+            buttonMenambahkanShalat();
+        }
+
     }
 
     private void buttonMenambahkanShalat() {
+
         final String[] namaShalat = {"Subuh", "Dzuhur", "Ashar", "Maghrib", "Isya"};
         final String[] kondisiShalat = {"Jamaah", "Sendiri", "Telat", "Tidak Shalat"};
         if (jam >= 4 && jam < 12) {
@@ -228,6 +234,7 @@ public class TambahkanShalatFragment extends Fragment {
         Map<String, Object> dataShalat = new HashMap<>();
         dataShalat.put("nama", namaShalat);
         dataShalat.put("status", kondisiShalat);
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         mProd.setMessage("Menambahkan...");
         mProd.show();

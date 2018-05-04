@@ -46,10 +46,13 @@ public class KalenderShalatFragment extends Fragment implements OnDateSelectedLi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         widget = getView().findViewById(R.id.calendarView);
         widget.setOnDateChangedListener(this);
         widget.setOnMonthChangedListener(this);
+
     }
+
 
     @Override
     public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {

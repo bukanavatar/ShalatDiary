@@ -1,6 +1,7 @@
 package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +42,9 @@ public class DetailCalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_calendar);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         statusShalatList = new ArrayList<>();
         detailCalendarListAdapter = new DetailCalendarListAdapter(statusShalatList);
 
@@ -57,6 +61,7 @@ public class DetailCalendarActivity extends AppCompatActivity {
             mRv.setHasFixedSize(true);
             mRv.setLayoutManager(new LinearLayoutManager(this));
             mRv.setAdapter(detailCalendarListAdapter);
+
 
             mFirebaseFirestore = FirebaseFirestore.getInstance();
 

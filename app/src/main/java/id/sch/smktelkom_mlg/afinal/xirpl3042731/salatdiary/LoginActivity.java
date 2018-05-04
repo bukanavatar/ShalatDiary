@@ -1,14 +1,15 @@
 package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,9 +19,10 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
-    EditText etEmail, etUsername, etPassword;
-    ProgressBar progressBar;
+    EditText etEmail, etPassword;
+    ProgressDialog pd;
     TextView signUp, login;
+    TextInputLayout tilEmail, tilPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +31,10 @@ public class LoginActivity extends AppCompatActivity {
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        progressBar = findViewById(R.id.progressBar);
+        tilEmail = findViewById(R.id.til_email);
+        tilPassword = findViewById(R.id.til_password);
 
+        pd = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         signUp = findViewById(R.id.SignUp);
         login = findViewById(R.id.btnLogin);
@@ -41,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
                 prosesMasukRegister();
             }
         });
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,33 +58,26 @@ public class LoginActivity extends AppCompatActivity {
         String S_password = etPassword.getText().toString().trim();
 
         if (S_email.isEmpty()) {
-            etEmail.setError("Email is required");
-            etEmail.requestFocus();
-            return;
+            tilEmail.setError("Email is required");
         } else if (S_password.isEmpty()) {
-            etPassword.setError("Password is required");
-            etPassword.requestFocus();
-            return;
+            tilPassword.setError("Password is required");
         } else if (S_password.length() < 6) {
-            etPassword.setError("Minimum length of password should be 6");
-            etPassword.requestFocus();
-            return;
+            tilPassword.setError("Minimum length of password should be 6");
         } else {
-            progressBar.setVisibility(View.VISIBLE);
-
+            pd.setMessage("Signin In...");
+            pd.show();
             mAuth.signInWithEmailAndPassword(S_email, S_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    progressBar.setVisibility(View.GONE);
+                    pd.dismiss();
                     if (task.isSuccessful()) {
-
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
 
                     } else {
-                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Snackbar.make(findViewById(R.id.relative_login), "Maaf Ada Kesalahan", Snackbar.LENGTH_LONG).show();
                     }
                 }
             });

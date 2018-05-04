@@ -38,6 +38,7 @@ public class DetailCalendarListAdapter extends RecyclerView.Adapter<DetailCalend
         return statusShalatModelList.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mName, mStatus;

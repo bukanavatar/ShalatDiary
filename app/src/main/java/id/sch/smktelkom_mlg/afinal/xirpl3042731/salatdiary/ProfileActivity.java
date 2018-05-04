@@ -42,8 +42,6 @@ public class ProfileActivity extends AppCompatActivity {
     Uri uriProfileImage;
     ProgressDialog pd;
     ProgressBar progressBar;
-
-
     String profileImageUrl;
 
     FirebaseAuth mAuth;
@@ -54,6 +52,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         mAuth = FirebaseAuth.getInstance();
 
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Profile");
 
         editText = findViewById(R.id.editTextDisplayName);
         imageView = findViewById(R.id.imageView);

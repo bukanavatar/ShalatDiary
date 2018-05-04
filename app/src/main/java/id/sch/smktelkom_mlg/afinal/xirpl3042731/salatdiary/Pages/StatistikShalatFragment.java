@@ -112,6 +112,7 @@ public class StatistikShalatFragment extends Fragment {
 
         initializeHalfChart();
         getDialyShalat();
+        getWeeklyData();
     }
 
     private void getDialyShalat() {
@@ -141,6 +142,30 @@ public class StatistikShalatFragment extends Fragment {
                                     mHalfPieChart.notifyDataSetChanged();
                                     Log.d(TAG, "Jumlah Tidak Shalat AAA: " + getTidakShalat());
                                 }
+                            }
+                        }
+                    });
+        }
+    }
+
+    private void getWeeklyData() {
+        mFirebaseFirestore = FirebaseFirestore.getInstance();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String email = user.getEmail();
+            mFirebaseFirestore.collection("dataShalat").document(email)
+                    .collection("tanggal").get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot doc : task.getResult()) {
+                                    Log.d(TAG, "Documents " + doc.getId() + " => " + doc.getData());
+                                }
+
+                            } else {
+                                Log.d(TAG, "Error getting documents: ", task.getException());
                             }
                         }
                     });

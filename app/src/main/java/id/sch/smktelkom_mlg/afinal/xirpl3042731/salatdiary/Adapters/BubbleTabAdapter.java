@@ -19,15 +19,15 @@ public class BubbleTabAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return JadwalShalatFragment.newInstance();
-            case 1:
-                return StatistikShalatFragment.newInstance();
-            case 2:
                 return TambahkanShalatFragment.newInstance();
-            case 3:
+            case 1:
                 return KalenderShalatFragment.newInstance();
-            default:
+            case 2:
+                return StatistikShalatFragment.newInstance();
+            case 3:
                 return JadwalShalatFragment.newInstance();
+            default:
+                return TambahkanShalatFragment.newInstance();
         }
     }
 
