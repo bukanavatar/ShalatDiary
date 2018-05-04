@@ -65,6 +65,7 @@ public class JadwalShalatFragment extends Fragment {
         tanggalsekarang.setText(dateFormatted);
 
         retrofitJadwalShalat();
+
     }
 
     @Override
