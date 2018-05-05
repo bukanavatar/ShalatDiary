@@ -10,7 +10,6 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -110,6 +109,7 @@ public class StatistikShalatFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         initializeHalfChart();
         getDialyShalat();
         getWeeklyData();
@@ -175,10 +175,9 @@ public class StatistikShalatFragment extends Fragment {
     private void initializeHalfChart() {
         mHalfPieChart = getView().findViewById(R.id.chart_dialy);
 
-        mHalfPieChart.setBackgroundColor(Color.WHITE);
         mHalfPieChart.setPadding(16, 16, 16, 16);
         mHalfPieChart.setUsePercentValues(true);
-        mHalfPieChart.getDescription().setEnabled(true);
+        mHalfPieChart.getDescription().setEnabled(false);
 
         mHalfPieChart.setDrawHoleEnabled(true);
         mHalfPieChart.setHoleColor(Color.WHITE);
@@ -225,7 +224,7 @@ public class StatistikShalatFragment extends Fragment {
         values.add(new PieEntry(tidakShalat, "Tidak Shalat"));
         Log.d(TAG, "Jumlah Tidak Shalat A: " + tidakShalat);
 
-        PieDataSet dataSet = new PieDataSet(values, "");
+        PieDataSet dataSet = new PieDataSet(values, "Dialy Statistics");
         dataSet.setSelectionShift(5f);
         dataSet.setSliceSpace(3f);
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -247,11 +246,6 @@ public class StatistikShalatFragment extends Fragment {
         int height = display.getHeight();  // deprecated
 
         int offset = (int) (height * 0.001); /* percent to move */
-
-        RelativeLayout.LayoutParams rlParams =
-                (RelativeLayout.LayoutParams) mHalfPieChart.getLayoutParams();
-        rlParams.setMargins(0, 0, 0, -offset);
-        mHalfPieChart.setLayoutParams(rlParams);
 
     }
 }

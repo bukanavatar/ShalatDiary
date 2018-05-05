@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -246,17 +246,17 @@ public class TambahkanShalatFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getActivity(), "Berhasil Menambahkan", Toast.LENGTH_LONG).show();
+                    Snackbar.make(getView().findViewById(R.id.layout_tambahkan), "Sukses Menambahkan", Snackbar.LENGTH_LONG).show();
                     mProd.dismiss();
                 } else {
-                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Snackbar.make(getView().findViewById(R.id.layout_tambahkan), task.getException().getMessage(), Snackbar.LENGTH_LONG).show();
                     mProd.dismiss();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Ada Kesalahan", Toast.LENGTH_LONG).show();
+                Snackbar.make(getView().findViewById(R.id.layout_tambahkan), "Terjadi Kesalahan", Snackbar.LENGTH_LONG).show();
             }
         });
 

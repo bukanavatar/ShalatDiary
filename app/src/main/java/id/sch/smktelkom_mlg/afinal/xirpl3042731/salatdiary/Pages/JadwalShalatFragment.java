@@ -2,17 +2,18 @@ package id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Pages;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class JadwalShalatFragment extends Fragment {
     Date tanggalSekarang = Calendar.getInstance().getTime();
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
     String dateFormatted = simpleDateFormat.format(tanggalSekarang);
-    RelativeLayout RelativeLayout;
+    ImageView relativeLayout;
 
     public JadwalShalatFragment() {
         // Required empty public constructor
@@ -65,32 +66,29 @@ public class JadwalShalatFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         tanggalsekarang = getView().findViewById(R.id.tanggalsekarang);
         tanggalsekarang.setText(dateFormatted);
-
+        relativeLayout = getView().findViewById(R.id.layout_bg);
         retrofitJadwalShalat();
         gantibackground();
-
-        RelativeLayout rl = getView().findViewById(R.id.layout_bg);
 
     }
 
     private void gantibackground() {
         if (jam >= 4 && jam < 12) {
-
-            rl.setBackground( @drawable/bg_subuh)
+            relativeLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_subuh));
         } else if (jam >= 12 && jam < 15) {
 
-            rl.setBackground( @drawable/bg_duhur)
+            relativeLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_duhur));
         } else if (jam >= 15 && jam < 18) {
 
-            rl.setBackground( @drawable/bg_ashar)
+            relativeLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_ashar));
         } else if (jam >= 18 && jam < 19) {
 
-            rl.setBackground( @drawable/bg_maghrib)
+            relativeLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_maghrib));
         } else {
-
-            rl.setBackground( @drawable/bg_isya)
+            relativeLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_isya));
         }
     }
 
@@ -122,7 +120,7 @@ public class JadwalShalatFragment extends Fragment {
             @Override
             public void onFailure(Call<JadwalShalatModel> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), "Maaf Ada Kesalahan", Toast.LENGTH_LONG).show();
+                Snackbar.make(getView().findViewById(R.id.ly_jadwal_shalat), "Silahkan Cek Kembali Koneksi Anda", Snackbar.LENGTH_LONG).show();
             }
         });
     }

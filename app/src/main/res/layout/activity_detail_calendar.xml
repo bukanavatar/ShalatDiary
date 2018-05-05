@@ -5,28 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".DetailCalendarActivity">
 
-   <android.support.v7.widget.Toolbar
-       android:id="@+id/tb_detail"
-       android:layout_width="match_parent"
-       android:layout_height="?attr/actionBarSize"
-       android:background="@color/colorPrimary"
-       android:elevation="4dp">
-
-      <TextView
-          android:id="@+id/tb_judul_detail"
-          style="@style/Base.TextAppearance.AppCompat.Title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Tanggal Hari Ini"
-          android:textColor="#fff" />
-   </android.support.v7.widget.Toolbar>
-
    <android.support.v7.widget.RecyclerView
        android:id="@+id/rv_detail"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_below="@+id/tb_detail">
+       android:layout_height="match_parent">
 
    </android.support.v7.widget.RecyclerView>
 
+   <TextView
+       android:id="@+id/tv_emptyDetail"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerInParent="true"
+       android:text="Tidak ada History pada Tanggal Ini"
+       android:textSize="18sp"
+       android:visibility="gone" />
 </RelativeLayout>

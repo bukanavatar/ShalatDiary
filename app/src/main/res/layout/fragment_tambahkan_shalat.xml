@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout_tambahkan"
     android:orientation="vertical"
     android:weightSum="7"
     tools:context="id.sch.smktelkom_mlg.afinal.xirpl3042731.salatdiary.Pages.TambahkanShalatFragment">
@@ -11,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="3">
-
         <TextView
             android:id="@+id/tv_status_shalat"
             android:layout_width="wrap_content"
@@ -19,7 +19,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginBottom="30dp"
             android:text="Bagaimana Shalatmu?"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
     </android.support.v7.widget.CardView>
@@ -34,7 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <Button
             android:id="@+id/but_jamaah"
@@ -61,7 +61,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2">
+        android:layout_weight="2"
+        android:padding="8dp">
 
         <Button
             android:id="@+id/but_telat"
